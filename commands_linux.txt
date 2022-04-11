@@ -1,0 +1,204 @@
+
+###################################################
+############### INTERFACES DE REDE #################
+
+Exibe enderçamento ip da interface wlan0
+$ ip addr show dev wlan0 
+
+
+Exclui endereço da interface
+$ ip addr del 192.168.1.10/24 dev wlan0
+
+
+Adiciona endereço na interface
+$ ip addr add 192.168.1.10/24 dev wlan0
+
+
+Exibe rotas de configuradas
+$ ip route show
+
+
+Adiciona uma nova rota padrao
+$ sudo ip route add default via 192.168.1.1
+
+
+Exibe as interfaces
+$ ip link show
+
+
+###################################################
+#################### PROCESSOS ####################
+
+Listar processos. -a (todos os processos) -u (em detalhes) -x
+$ ps aux
+
+
+Filtrar processo
+$ ps aux | grep apache2
+
+
+Enviando sinal de parada (STOP)
+$ kill -SIGSTOP apache2
+
+
+Enviando sinal de start
+$ kill -SIGCONT apache2
+
+
+Matando mais de um processo com mesmo nome
+$ sudo killall apache2
+
+Iniciar processo em segundo plano
+$ xboard &
+
+
+###################################################
+##################### SCREENS #####################
+
+Criando um terminal virtual
+$ screen -S terminal_name
+
+
+Abandonando terminal
+$ Ctrl+A D
+
+
+Retornando a um terminal
+$ screen -r terminal_name
+
+
+Encerrando terminal
+$ exi
+
+###################################################
+###################### NMAP #######################
+
+Escaneaando portas padrao
+$ sudo nmap 127.0.0.1 --allports -sV
+
+
+###################################################
+################ PERMISSIONAMENTO #################
+
+Alterando dono do arquivo
+$ sudo chown christopher arquivoNovo.txt
+
+
+Alterando dono e grupo ao mesmo tempo
+$ sudo chown root:root arquivoNovo.txt
+
+
+Aterando em varios arquivos e com recursividade
+$ sudo chown christopher * -r
+
+
+Alterando grupo
+$ sudo chgrp christopher arquivoNovo.txt
+
+
+Adionando permissao de execucao do arquivo para o usuario
+$ chmod u+x arquivoNovo.txt
+
+
+Para o grupo
+$ chmod g+x arquivoNovo.txt
+
+
+Removendo permissao de escrita do usuario
+$ chmod u-w arquivoNovo.txt
+
+
+Aplicando a todos
+$ chmod a+w  arquivoNovo.txt
+
+
+Aplicando a todos usuarios do sistema
+$ chmod o+w arquivoNovo.txt
+
+
+Outro padra: r-leitura = 4; w-escrita = 2; x-exec = 1; todas = 7. 
+$ chmod 740 arquivoNovo.txt
+
+
+####################################################
+####################### SSH ########################
+
+Instalando server
+$ apt install openssh-server
+
+
+Incializaçao do sistema
+sudo systemctl enable ssh
+
+
+Acessando host
+$ ssh christopher@192.168.0.10 
+
+
+Adicionando host /etc/hosts
+$ echo "192.168.0.10 raspbarry" >> /etc/hosts
+
+
+Alterando porta padrao
+$ sudo vi /etc/ssh/sshd_config
+Port 2222
+
+Acessando host com chave publica
+Criando chaves
+$ ssh-keygen
+
+Copiando chave publica para o host: /home/.ssh/authorized_keys
+$ ssh-copy-id id_rsa.pub eliot@192.168.1.10
+
+Configurando arquivo /etc/ssh/sshd_config
+$ PasswordAuthentication no
+
+
+
+####################################################
+###################### SCP #########################
+
+Copiando arquivo
+$ scp text.txt christopher@192.168.0.10:/tmp
+
+Inverso
+$ scp christopher@192.168.0.10:/tmp/text.txt .
+
+
+####################################################
+##################### VSFTP ########################
+
+Instalando serviço
+$ apt install vsftp
+
+
+Conexao simples
+$ ftp 192.168.1.10
+
+Criando certificado e chave privada rsa
+$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem
+
+
+Configurando ssl - /etc/vsftpd.conf
+rsa_cert_file=/etc/ssl/private/vsftpd.pem
+rsa_private_key=/etc/ssl/private/vsftpd.pem
+ssl_enable=YES
+
+
+Conexao segura
+$ sftp christopher@192.168.0.10
+
+
+####################################################
+###################### ALIAS #######################
+
+
+
+####################################################
+####################### AWK ########################
+
+
+####################################################
+################ AGENDANDO TAREFAS #################
+
+
